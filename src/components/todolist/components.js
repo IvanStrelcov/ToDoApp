@@ -7,7 +7,7 @@ export default () => {
     template,
     controller,
     restrict: 'E',
-    replace: true,
+    replace: false,
     controllerAs: '$tdlctrl',
     bindToController: true,
   };

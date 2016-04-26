@@ -9,7 +9,6 @@ export default class TodolistClass {
   }
 
   getTodos() {
-    this.todos = _.sortedUniq(this.todos)
     return this.todos;
   }
 
