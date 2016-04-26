@@ -8,7 +8,7 @@ export default () => {
     controller,
     restrict: 'E',
     replace: true,
-    controllerAs: '$ctrl',
+    controllerAs: '$tdlctrl',
     bindToController: true,
   };
 };

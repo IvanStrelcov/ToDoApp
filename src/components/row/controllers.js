@@ -8,7 +8,12 @@ export default class TodolistClass {
     this.todoList = [];
   }
 
+  render() {
+    return this.todoList;
+  }
+
   addTodo() {
-    
+    this.todoList.push('<app-todolist></app-todolist>');
+    console.log(this.todoList);
   }
 }

@@ -9,11 +9,11 @@
 
     <div class="panel-body">
       <ul class="list-group">
-        <li class="list-group-item" ng-repeat="todo in $ctrl.getTodos()">
-          <button type="button" class="btn-close close" aria-label="Close" ng-click="$ctrl.removeTodo($index)">
+        <li class="list-group-item" ng-repeat="todo in $tdlctrl.getTodos()">
+          <button type="button" class="btn-close close" aria-label="Close" ng-click="$tdlctrl.removeTodo($index)">
             <span aria-hidden="true" class="small glyphicon glyphicon-remove"></span>
           </button>
-          <button type="button" class="btn-close close" aria-label="Close" ng-click="$ctrl.changeTodoText($index)">
+          <button type="button" class="btn-close close" aria-label="Close" ng-click="$tdlctrl.changeTodoText($index)">
             <span aria-hidden="true" class="small glyphicon glyphicon-pencil"></span>
           </button>
           <label>
@@ -25,9 +25,9 @@
     </div>
 
     <div class="panel-footer">
-      <form ng-submit="$ctrl.addTodo($event)">
+      <form ng-submit="$tdlctrl.addTodo($event)">
         <input type="text"
-               ng-model="$ctrl.todoText"
+               ng-model="$tdlctrl.todoText"
                placeholder="Add new todo here"
                class="form-control"
                required>

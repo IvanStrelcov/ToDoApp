@@ -1,6 +1,8 @@
 <div class="row">
-  <ul>
-    <li ng-repeat="todo in $rctrl.todoList"></li>
-    <app-emptywell ng-click="addTodo()">
+  <ul class="list-unstyled">
+    <li ng-repeat="todo in $rctrl.render()">
+
+    </li>    
   </ul>
+  <app-emptywell ng-click="addTodo()">
 </div>
