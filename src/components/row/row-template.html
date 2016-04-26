@@ -1,8 +1,8 @@
 <div class="row">
-  <ul class="list-unstyled">
-    <li ng-repeat="todo in $rctrl.render()">
-
-    </li>    
-  </ul>
-  <app-emptywell ng-click="addTodo()">
+  <!-- <ul class="list-inline-unstyle"> -->
+    <div class="list-inline" ng-repeat="todo in $rctrl.render() track by $index">
+      <app-todolist ng-model="todo"></app-todolist>
+    </div>
+  <!-- </ul> -->
+  <app-emptywell ng-click="$rctrl.addTodo()" ng-if="$rctrl.todoList.length < 3">
 </div>

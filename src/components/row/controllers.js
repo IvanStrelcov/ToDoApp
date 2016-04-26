@@ -1,4 +1,4 @@
-export default class TodolistClass {
+export default class RowClass {
   constructor($scope, $http, $log) {
     'ngInject';
     this.$scope = $scope;
@@ -13,7 +13,6 @@ export default class TodolistClass {
   }
 
   addTodo() {
-    this.todoList.push('<app-todolist></app-todolist>');
-    console.log(this.todoList);
+    this.todoList.push({title: 'Default title', todos: []});
   }
 }
