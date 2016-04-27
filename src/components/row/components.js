@@ -8,7 +8,7 @@ export default () => {
     controller,
     restrict: 'E',
     replace: true,
-    controllerAs: '$rctrl',
+    controllerAs: '$rCtrl',
     bindToController: true,
   };
 };

@@ -1,8 +1,6 @@
 <div class="row">
-  <!-- <ul class="list-inline-unstyle"> -->
-    <div class="list-inline" ng-repeat="todo in $rctrl.render() track by $index">
-      <app-todolist ng-model="todo"></app-todolist>
-    </div>
-  <!-- </ul> -->
-  <app-emptywell ng-click="$rctrl.addTodo()" ng-if="$rctrl.todoList.length < 3">
+  <div class="list-inline" ng-repeat="todo in $rCtrl.render() track by $index">
+    <app-todolist ng-model="todo"></app-todolist>
+  </div>
+  <app-emptywell ng-click="$rCtrl.addTodo()" ng-if="$rCtrl.todoList.length < 3">
 </div>

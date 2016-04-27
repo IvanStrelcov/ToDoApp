@@ -6,6 +6,7 @@ export default class TodolistClass {
 
   $onInit() {
     this.todos = [];
+    // console.log(this.rowCtrl.todoList);
   }
 
   getTodos() {
@@ -20,12 +21,7 @@ export default class TodolistClass {
     this.todoText = '';
   }
 
-  removeTodo(index) {
-    this.todos.splice(index, 1);
-  }
-
-  changeTodoText(index) {
-    let text = this.todos[index].text;
-    console.log(text);
+  deleteTodo(item) {
+    this.rowCtrl.todoList.splice(this.rowCtrl.todoList.indexOf(item), 1);
   }
 }

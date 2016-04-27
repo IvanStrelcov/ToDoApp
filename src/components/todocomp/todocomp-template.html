@@ -1,0 +1,27 @@
+<div>
+  <button type="button"
+          class="btn-close close"
+          aria-label="Close"
+          ng-click="$tdcCtrl.removeTodo($index)"
+          ng-show="!$tdcCtrl.show">
+    <span aria-hidden="true" class="small glyphicon glyphicon-remove"></span>
+  </button>
+  <button type="button"
+          class="btn-close close"
+          aria-label="Close"
+          ng-click="$tdcCtrl.editTodo($index)"
+          ng-show="!$tdcCtrl.show">
+    <span aria-hidden="true" class="small glyphicon glyphicon-pencil"></span>
+  </button>
+  <label ng-show="!$tdcCtrl.show">
+    <input type="checkbox"
+           ng-model="todo.done">
+    <span class="done-{{todo.done}}">{{todo.text}}</span>
+  </label>
+  <form ng-submit="$tdcCtrl.changeTodo($index)" ng-if="$tdcCtrl.show">
+    <input type="text"
+           class="form-control"
+           ng-model="$tdcCtrl.changeText"
+           required>
+  </form>
+</div>
