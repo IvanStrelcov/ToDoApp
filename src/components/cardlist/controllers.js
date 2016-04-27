@@ -5,7 +5,7 @@ export default class CardListController {
   }
 
   addTodo() {
-    this.cards.push({title: 'Default title', todos: []});
+    this.cards.push({title: 'Default title', todos: [], class: 'default'});
   }
 
   delete(index) {

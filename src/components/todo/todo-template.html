@@ -13,10 +13,10 @@
           ng-show="!$tdCtrl.show">
     <span aria-hidden="true" class="small glyphicon glyphicon-pencil"></span>
   </button>
-  <label ng-show="!$tdCtrl.show">
+  <label ng-show="!$tdCtrl.show" ng-click="$tdCtrl.checkDone($event)">
     <input type="checkbox"
-           ng-model="todo.done">
-    <span class="done-{{todo.done}}">{{$tdCtrl.todo.text}}</span>
+           ng-model="$tdCtrl.todo.done">
+    <span class="done-{{$tdCtrl.todo.done}}">{{$tdCtrl.todo.text}}</span>
   </label>
   <form ng-submit="$tdCtrl.change()" ng-if="$tdCtrl.show">
     <input type="text"

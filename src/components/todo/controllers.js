@@ -7,9 +7,10 @@ export default class TodoController {
 
   delete() {
     this.CardController.deleteTodo(this.index);
+    this.CardController.changeClass();
   }
 
-  edit() {    
+  edit() {
     let text = this.todo.text;
     this.changeText = this.todo.text;
     this.todo.text = '';
@@ -23,5 +24,11 @@ export default class TodoController {
     this.todo.text = this.changeText;
     this.changeText = '';
     this.show = false;
+    this.CardController.changeClass();
+  }
+
+  checkDone(event) {
+    event.stopPropagation();
+    this.CardController.changeClass();
   }
 }
