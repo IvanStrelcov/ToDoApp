@@ -1,0 +1,32 @@
+<div class="col-xs-6 col-md-4">
+  <div class="thumbnail">
+    <div class=" panel panel-default">
+      <div class="panel-heading list-group-item-success">
+        <button type="button"
+                class="close"
+                aria-label="Close"
+                ng-click="$cardCtrl.delete()">
+          <span aria-hidden="true" class="small glyphicon glyphicon-remove"></span>
+        </button>
+        <h3 class="panel-title"
+            ng-bind="$cardCtrl.card.title">ToDo List</h3>
+      </div>
+
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="todo in $cardCtrl.card.todos track by $index">
+            <todo todo="todo" index="$index"></todo>
+          </li>
+        </ul>
+
+      <div class="panel-footer">
+        <form ng-submit="$cardCtrl.addTodo($event)">
+          <input type="text"
+                 ng-model="$cardCtrl.todoText"
+                 placeholder="Add new todo here"
+                 class="form-control"
+                 required>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

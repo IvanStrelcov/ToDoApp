@@ -2,26 +2,26 @@
   <button type="button"
           class="btn-close close"
           aria-label="Close"
-          ng-click="$tdcCtrl.removeTodo($index)"
-          ng-show="!$tdcCtrl.show">
+          ng-click="$tdCtrl.delete()"
+          ng-show="!$tdCtrl.show">
     <span aria-hidden="true" class="small glyphicon glyphicon-remove"></span>
   </button>
   <button type="button"
           class="btn-close close"
           aria-label="Close"
-          ng-click="$tdcCtrl.editTodo($index)"
-          ng-show="!$tdcCtrl.show">
+          ng-click="$tdCtrl.edit()"
+          ng-show="!$tdCtrl.show">
     <span aria-hidden="true" class="small glyphicon glyphicon-pencil"></span>
   </button>
-  <label ng-show="!$tdcCtrl.show">
+  <label ng-show="!$tdCtrl.show">
     <input type="checkbox"
            ng-model="todo.done">
-    <span class="done-{{todo.done}}">{{todo.text}}</span>
+    <span class="done-{{todo.done}}">{{$tdCtrl.todo.text}}</span>
   </label>
-  <form ng-submit="$tdcCtrl.changeTodo($index)" ng-if="$tdcCtrl.show">
+  <form ng-submit="$tdCtrl.change()" ng-if="$tdCtrl.show">
     <input type="text"
            class="form-control"
-           ng-model="$tdcCtrl.changeText"
+           ng-model="$tdCtrl.changeText"
            required>
   </form>
 </div>

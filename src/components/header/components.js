@@ -1,5 +1,4 @@
 import template from './header-template.html';
-import './header.less';
 
 export default () => {
   return {

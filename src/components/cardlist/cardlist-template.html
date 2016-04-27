@@ -1,0 +1,6 @@
+<div class="row">
+  <div class="list-inline" ng-repeat="card in $clCtrl.cards track by $index">
+    <card index="$index" card="card"></card>
+  </div>
+  <empty-well ng-click="$clCtrl.addTodo()" ng-if="$clCtrl.cards.length < 3"></empty-well>
+</div>

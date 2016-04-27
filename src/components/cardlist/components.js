@@ -1,5 +1,4 @@
-import template from './todocomp-template.html';
-import './todocomp.less';
+import template from './cardlist-template.html';
 import controller from './controllers';
 
 export default () => {
@@ -8,10 +7,7 @@ export default () => {
     controller,
     restrict: 'E',
     replace: true,
-    controllerAs: '$tdcCtrl',
+    controllerAs: '$clCtrl',
     bindToController: true,
-    require: {
-      listCtrl: '^^appTodolist'
-    }
   };
 };

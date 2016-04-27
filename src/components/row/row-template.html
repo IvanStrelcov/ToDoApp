@@ -1,6 +1,0 @@
-<div class="row">
-  <div class="list-inline" ng-repeat="todo in $rCtrl.render() track by $index">
-    <app-todolist></app-todolist>
-  </div>
-  <app-emptywell ng-click="$rCtrl.addTodo()" ng-if="$rCtrl.todoList.length < 3">
-</div>

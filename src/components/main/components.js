@@ -1,5 +1,4 @@
 import template from './main-template.html';
-import './main.less';
 
 export default () => {
   return {
