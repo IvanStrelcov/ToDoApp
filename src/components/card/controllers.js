@@ -39,4 +39,10 @@ export default class CardController {
       }
     }
   }
+
+  addBlur() {
+    if(confirm('You do not save your changes .Leave without saving?')) {
+      this.todoText = '';
+    }
+  }
 }
