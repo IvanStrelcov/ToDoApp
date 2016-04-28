@@ -1,4 +1,5 @@
 export default class MainController {
+
   $onInit() {
     this.cardlists = [];
   }

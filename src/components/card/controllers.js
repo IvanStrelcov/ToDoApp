@@ -1,6 +1,14 @@
 export default class CardController {
 
+  constructor(MainService) {
+    this.MainService = MainService;
+  }
+
   addTodo() {
+    if(this.MainService.check == true) {
+      alert('Detection of incomplete action');
+      return;
+    }
     for (let i = 0; i < this.card.todos.length; i++) {
       if(this.card.todos[i].text == this.todoText) {
         alert('This case is already planned');
@@ -19,6 +27,10 @@ export default class CardController {
   }
 
   delete() {
+    if(this.MainService.check == true) {
+      alert('Detection of incomplete action');
+      return;
+    }
     if(confirm('You really want to delete this card?')) {
       this.CardListController.delete(this.index);
     }
@@ -37,12 +49,6 @@ export default class CardController {
       else {
         this.card.class = 'success';
       }
-    }
-  }
-
-  addBlur() {
-    if(confirm('You do not save your changes .Leave without saving?')) {
-      this.todoText = '';
     }
   }
 }
