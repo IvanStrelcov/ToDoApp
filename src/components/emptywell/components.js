@@ -1,4 +1,5 @@
 import template from './emptywell-template.html';
+import './emptywell.less';
 
 export default () => {
   return {
