@@ -1,3 +1,8 @@
 <div class="container">
-  <card-list></card-list>
+  <div class="row" ng-repeat="cardlist in $mainCtrl.cardlists track by $index" ng-if="$mainCtrl.cardlists.length">
+    <card-list cardlist="cardlist" index="$index"></card-list>
+  </div>
+  <div class="row">
+    <empty-well ng-click="$mainCtrl.addRow()"></empty-well>
+  </div>
 </div>

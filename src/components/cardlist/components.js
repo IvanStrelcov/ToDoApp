@@ -7,6 +7,13 @@ export default () => {
     controller,
     restrict: 'E',
     replace: true,
+    scope: {
+      index: '=',
+      cardlist: '='
+    },
+    require: {
+      MainController: '^^appMain'
+    },
     controllerAs: '$clCtrl',
     bindToController: true,
   };
