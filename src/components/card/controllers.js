@@ -2,7 +2,10 @@ export default class CardController {
 
   addTodo() {
     for (let i = 0; i < this.card.todos.length; i++) {
-      if(this.card.todos[i].text == this.todoText) return false;
+      if(this.card.todos[i].text == this.todoText) {
+        alert('This case is already planned');
+        return false;
+      }
     }
     this.card.todos.push({text:this.todoText, done:false});
     this.todoText = '';
@@ -16,7 +19,9 @@ export default class CardController {
   }
 
   delete() {
-    this.CardListController.delete(this.index);
+    if(confirm('You really want to delete this card?')) {
+      this.CardListController.delete(this.index);
+    }
   }
 
   changeClass() {

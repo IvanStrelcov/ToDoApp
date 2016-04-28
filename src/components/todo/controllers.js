@@ -6,8 +6,10 @@ export default class TodoController {
   }
 
   delete() {
-    this.CardController.deleteTodo(this.index);
-    this.CardController.changeClass();
+    if (confirm('You really want to delete this case?')) {
+      this.CardController.deleteTodo(this.index);
+      this.CardController.changeClass();
+    }
   }
 
   edit() {
@@ -19,7 +21,10 @@ export default class TodoController {
 
   change() {
     for (let i = 0; i < this.CardController.card.todos.length; i++) {
-      if(this.CardController.card.todos[i].text == this.changeText) return false;
+      if(this.CardController.card.todos[i].text == this.changeText) {
+        alert('This case is already planned');
+        return false;
+      }
     }
     this.todo.text = this.changeText;
     this.changeText = '';
