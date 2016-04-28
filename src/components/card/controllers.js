@@ -7,10 +7,12 @@ export default class CardController {
     this.card.todos.push({text:this.todoText, done:false});
     this.todoText = '';
     this.changeClass();
+    this.card.total += 1;
   }
 
   deleteTodo(index) {
     this.card.todos.splice(index, 1);
+    this.card.total -= 1;
   }
 
   delete() {

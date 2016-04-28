@@ -9,14 +9,15 @@
           <span aria-hidden="true" class="small glyphicon glyphicon-remove"></span>
         </button>
         <h3 class="panel-title"
-            ng-bind="$cardCtrl.card.title">ToDo List</h3>
+            ng-bind="$cardCtrl.card.title">Todo Card</h3>
+        <span>Total todos: {{$cardCtrl.card.total}}</span>
       </div>
 
-        <ul class="list-group">
-          <li class="list-group-item" ng-repeat="todo in $cardCtrl.card.todos track by $index">
-            <todo todo="todo" index="$index"></todo>
-          </li>
-        </ul>
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="todo in $cardCtrl.card.todos track by $index">
+          <todo todo="todo" index="$index"></todo>
+        </li>
+      </ul>
 
       <div class="panel-footer">
         <form ng-submit="$cardCtrl.addTodo($event)">
