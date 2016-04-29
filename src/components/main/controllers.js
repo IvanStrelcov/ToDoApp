@@ -5,7 +5,8 @@ export default class MainController {
   }
 
   addRow() {
-    this.cardlists.push({cards: [{title: 'Default title', todos: [], class: 'default', total: 0}]});
+    let cardname = prompt('Enter the name of the card','Default title');
+    this.cardlists.push({cards: [{title: cardname || 'Default title', todos: [], class: 'default', total: 0}]});
   }
 
   deleteRow(index) {

@@ -1,7 +1,8 @@
 export default class CardListController {
 
   addCard() {
-    this.cardlist.cards.push({title: 'Default title', todos: [], class: 'default', total: 0});
+    let cardname = prompt('Enter the name of the card','Default title');
+    this.cardlist.cards.push({title: cardname || 'Default title', todos: [], class: 'default', total: 0});
   }
 
   delete(index) {
