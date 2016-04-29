@@ -70,7 +70,6 @@ export default class CardController {
     this.show = false;
   }
 
-
 // delete card
 
   delete() {

@@ -2,6 +2,7 @@ export default class CardListController {
 
   addCard() {
     let cardname = prompt('Enter the name of the card','Default title');
+    if (cardname === null) return;
     for (let variable of this.MainController.cardlists) {
       for (let key of variable.cards) {
         if (cardname.length > 20) {
