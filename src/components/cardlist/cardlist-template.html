@@ -2,5 +2,5 @@
   <div class="list-inline" ng-repeat="card in $clCtrl.cardlist.cards track by $index">
     <card index="$index" card="card"></card>
   </div>
-  <empty-well ng-click="$clCtrl.addCard()" ng-if="$clCtrl.cardlist.cards.length < 3"></empty-well>
+  <add-btn ng-click="$clCtrl.addCard()" ng-if="$clCtrl.cardlist.cards.length < 3"></add-btn>
 </div>

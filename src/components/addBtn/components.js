@@ -1,5 +1,5 @@
-import template from './emptywell-template.html';
-import './emptywell.less';
+import template from './addBtn-template.html';
+import './addBtn.less';
 
 export default () => {
   return {

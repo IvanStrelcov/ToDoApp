@@ -26,7 +26,6 @@ export default class TodoController {
   }
 
   change() {
-    console.log(this);
     for (let i = 0; i < this.CardController.card.todos.length; i++) {
       if(this.CardController.card.todos[i].text == this.changeText && this.changeText != this.reservText) {
         alert('This case is already planned');
