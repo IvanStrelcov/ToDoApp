@@ -56,7 +56,7 @@ export default class CardController {
           alert('The name is too large, use less symbol');
           return false;
         }
-        if (_.includes(key, this.changeText) && this.changeText != 'Default title' && this.changeText != this.card.title) {
+        if (_.includes(key, this.changeText) && this.changeText != this.card.title) {
           alert('Card with that name already exist');
           return false;
         }
