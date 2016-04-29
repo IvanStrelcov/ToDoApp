@@ -5,12 +5,27 @@
         <button type="button"
                 class="close"
                 aria-label="Close"
-                ng-click="$cardCtrl.delete()">
+                ng-click="$cardCtrl.delete()"
+                ng-show="!$cardCtrl.show">
           <span aria-hidden="true" class="small glyphicon glyphicon-remove"></span>
         </button>
+        <button type="button"
+                class="btn-close close"
+                aria-label="Close"
+                ng-click="$cardCtrl.edit()"
+                ng-show="!$cardCtrl.show">
+          <span aria-hidden="true" class="small glyphicon glyphicon-pencil"></span>
+        </button>
         <h3 class="panel-title"
-            ng-bind="$cardCtrl.card.title">Todo Card</h3>
-        <span>Total todos: {{$cardCtrl.card.total}}</span>
+            ng-bind="$cardCtrl.card.title"
+            ng-show="!$cardCtrl.show">Todo Card</h3>
+        <span ng-show="!$cardCtrl.show">Total todos: {{$cardCtrl.card.total}}</span>
+        <form ng-submit="$cardCtrl.change()" ng-if="$cardCtrl.show">
+          <input type="text"
+                 class="form-control"
+                 ng-model="$cardCtrl.changeText"
+                 required>
+        </form>
       </div>
 
       <ul class="list-group">

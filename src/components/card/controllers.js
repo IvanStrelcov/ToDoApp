@@ -4,6 +4,14 @@ export default class CardController {
     this.MainService = MainService;
   }
 
+  $onInit() {
+    this.changeText = '';
+    this.reservText = '';
+    this.show = false;
+  }
+
+// add todo case
+
   addTodo() {
     if(this.MainService.check == true) {
       alert('Detection of incomplete action');
@@ -21,10 +29,49 @@ export default class CardController {
     this.card.total += 1;
   }
 
+// delete todo case
+
   deleteTodo(index) {
     this.card.todos.splice(index, 1);
     this.card.total -= 1;
   }
+
+// redact title
+
+  edit() {
+    if(this.MainService.check == true) {
+      alert('Detection of incomplete action');
+      return;
+    }
+    let text = this.card.title;
+    this.changeText = text;
+    this.reservText = text;
+    text = '';
+    this.MainService.check = true;
+    this.show = true;
+  }
+
+  change() {
+    for (let variable of this.MainController.cardlists) {
+      for (let key of variable.cards) {
+        if (this.changeText.length > 20) {
+          alert('The name is too large, use less symbol');
+          return;
+        }
+        if (_.includes(key, this.changeText) && this.changeText != 'Default title') {
+          alert('Card with that name already exist');
+          return;
+        }
+      }
+    }
+    this.card.title = this.changeText;
+    this.changeText = '';
+    this.MainService.check = false;
+    this.show = false;
+  }
+
+
+// delete card
 
   delete() {
     if(this.MainService.check == true) {
@@ -35,6 +82,8 @@ export default class CardController {
       this.CardListController.delete(this.index);
     }
   }
+
+// change color of card
 
   changeClass() {
     if (this.card.todos.length === 0) {

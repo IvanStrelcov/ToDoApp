@@ -14,7 +14,8 @@ export default () => {
       index: '='
     },
     require: {
-      CardListController: '^^cardList'
+      CardListController: '^^cardList',
+      MainController: '^^appMain',
     }
   };
 };

@@ -10,16 +10,7 @@ export default class TodoController {
     this.show = false;
   }
 
-  delete() {
-    if(this.MainService.check == true) {
-      alert('Detection of incomplete action');
-      return;
-    }
-    if (confirm('You really want to delete this case?')) {
-      this.CardController.deleteTodo(this.index);
-      this.CardController.changeClass();
-    }
-  }
+// redact todo case
 
   edit() {
     if(this.MainService.check == true) {
@@ -48,6 +39,21 @@ export default class TodoController {
     this.show = false;
     this.CardController.changeClass();
   }
+
+// delete todo case
+
+  delete() {
+    if(this.MainService.check == true) {
+      alert('Detection of incomplete action');
+      return;
+    }
+    if (confirm('You really want to delete this case?')) {
+      this.CardController.deleteTodo(this.index);
+      this.CardController.changeClass();
+    }
+  }
+
+// checks whether all marked INPUT
 
   checkDone(event) {
     event.stopPropagation();
