@@ -3,9 +3,9 @@ export default class CardController {
   constructor(MainService) {
     this.MainService = MainService;
   }
-
+  
   $onInit() {
-    this.changeText = '';
+    this.editTitle = '';
     this.show = false;
   }
 
@@ -42,9 +42,8 @@ export default class CardController {
       alert('Detection of incomplete action');
       return false;
     }
-    let text = this.card.title;
-    this.changeText = text;
-    text = '';
+    this.editTitle = this.card.title;
+    this.card.title = '';
     this.MainService.check = true;
     this.show = true;
   }
@@ -52,18 +51,18 @@ export default class CardController {
   change() {
     for (let variable of this.MainController.cardlists) {
       for (let key of variable.cards) {
-        if (this.changeText.length > 20) {
+        if (this.editTitle.length > 20) {
           alert('The name is too large, use less symbol');
           return false;
         }
-        if (_.includes(key, this.changeText) && this.changeText != this.card.title) {
+        if (_.includes(key, this.editTitle) && this.editTitle != this.card.title) {
           alert('Card with that name already exist');
           return false;
         }
       }
     }
-    this.card.title = this.changeText;
-    this.changeText = '';
+    this.card.title = this.editTitle;
+    this.editTitle = '';
     this.MainService.check = false;
     this.show = false;
   }

@@ -1,7 +1,7 @@
 import ng from 'angular';
 
 import MainComponent from './components';
-import MainService from './services.js';
+import MainService from './service.js';
 
 export default ng.module('app.components.main', [])
   .directive('appMain', [MainComponent])
