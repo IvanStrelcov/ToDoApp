@@ -1,33 +1,63 @@
-export default class CardListController {
+import template from './modal-template.html';
 
-  constructor(MainService) {
+class ModalController {
+  constructor(MainService){
     this.MainService = MainService;
   }
 
-  addCard() {
-    let cardname = prompt('Enter the name of the card', '');
-    if (cardname === null) return;
-    for (let variable of this.MainController.cardlists) {
-      for (let key of variable.cards) {
-        if (cardname.length > 20) {
-          alert('The name is too large, use less symbol');
-          return;
-        }
-        if (_.includes(key, cardname)) {
-          alert('Card with that name already exist');
+  $onInit() {
+    this.cardname = '';
+    this.error = false;
+  }
+
+  checkTitle() {
+    if (this.cardname.length === 0) {
+      this.cardname = 'Default title';
+    }
+    for (let variable of this.MainService.cardlists) {
+      for (let key of variable) {
+        if (_.includes(key, this.cardname) && this.cardname != 'Default title') {
+          this.error = true;
           return;
         }
       }
     }
-    if (cardname === '' || cardname === defCardname) {
-      this.MainService.count++;
-    }
-    this.cardlist.cards.push({title: cardname || 'Default title ' + this.MainService.count, todos: [], class: 'default', total: 0});
+    this.$close(this.cardname);
+  }
+
+  cancel() {
+    this.$dismiss();
+  }
+}
+
+export default class CardListController {
+
+  constructor(MainService, $uibModal) {
+    this.MainService = MainService;
+    this.$uibModal = $uibModal;
+  }
+
+  $onInit() {
+    console.log('CardListController, this.cardlist: ', this.cardlist);
+  }
+
+  open() {
+    const modal = this.$uibModal.open({
+      animation: true,
+      template: template,
+      controller: ModalController,
+      controllerAs: '$modalCtrl',
+      bindToController: true,
+    });
+
+    modal.result.then(title => {
+      this.cardlist.push({title: title, todos: [], class: 'default', total: 0});
+    });
   }
 
   delete(index) {
-    this.cardlist.cards.splice(index, 1);
-    if (this.cardlist.cards.length < 1) {
+    this.cardlist.splice(index, 1);
+    if (this.cardlist.length < 1) {
       this.MainController.deleteRow(this.index);
     }
   }

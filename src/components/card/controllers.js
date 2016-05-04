@@ -3,10 +3,11 @@ export default class CardController {
   constructor(MainService) {
     this.MainService = MainService;
   }
-  
+
   $onInit() {
     this.editTitle = '';
     this.show = false;
+    this.error = false;
   }
 
 // add todo case
@@ -50,7 +51,7 @@ export default class CardController {
 
   change() {
     for (let variable of this.MainController.cardlists) {
-      for (let key of variable.cards) {
+      for (let key of variable) {
         if (this.editTitle.length > 20) {
           alert('The name is too large, use less symbol');
           return false;

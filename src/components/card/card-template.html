@@ -18,13 +18,15 @@
         </button>
         <h3 class="panel-title"
             ng-bind="$cardCtrl.card.title"
-            ng-show="!$cardCtrl.show">Todo Card</h3>
+            ng-show="!$cardCtrl.show">
+        </h3>
         <span ng-show="!$cardCtrl.show">Total todos: {{$cardCtrl.card.total}}</span>
         <form ng-submit="$cardCtrl.change()" ng-if="$cardCtrl.show">
           <input type="text"
-                 class="form-control"
+                 class="form-control error-{{$modalCtrl.error}}"
                  ng-model="$cardCtrl.editTitle"
                  required>
+          <p ng-if="$modalCtrl.error" class="error-msg">Card with that name already exist</p>
         </form>
       </div>
 

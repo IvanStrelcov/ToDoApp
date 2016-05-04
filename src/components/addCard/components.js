@@ -1,5 +1,5 @@
-import template from './addBtn-template.html';
-import './addBtn.less';
+import template from './addCard-template.html';
+import './addCard.less';
 
 export default () => {
   return {

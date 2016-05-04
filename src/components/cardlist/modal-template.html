@@ -1,0 +1,18 @@
+<div class="modal-header">
+  <h3 class="modal-title">Add new Card</h3>
+</div>
+<div class="modal-body">
+  <form type="submit" ng-submit="$modalCtrl.checkTitle()">
+    <input type="text"
+           ng-model="$modalCtrl.cardname"
+           maxlength="20"
+           placeholder="Add title of new Card"
+           class="form-control error-{{$modalCtrl.error}}"
+           required>
+           <p ng-if="$modalCtrl.error" class="error-msg">Card with that name already exist</p>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" type="button" ng-click="$modalCtrl.checkTitle()">OK</button>
+  <button class="btn btn-warning" type="button" ng-click="$modalCtrl.cancel()">Cancel</button>
+</div>

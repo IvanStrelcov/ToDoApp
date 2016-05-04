@@ -1,5 +1,6 @@
 import template from './cardlist-template.html';
 import controller from './controllers';
+import './cardlist.less';
 
 export default () => {
   return {
