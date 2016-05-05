@@ -38,10 +38,6 @@ export default class CardListController {
     this.$uibModal = $uibModal;
   }
 
-  $onInit() {
-    console.log('CardListController, this.cardlist: ', this.cardlist);
-  }
-
   open() {
     const modal = this.$uibModal.open({
       animation: true,

@@ -20,8 +20,9 @@
   </label>
   <form ng-submit="$tdCtrl.change()" ng-if="$tdCtrl.show">
     <input type="text"
-           class="form-control"
+           class="form-control error-{{$tdCtrl.caseError}}"
            ng-model="$tdCtrl.changeText"
            required>
+    <p ng-if="$tdCtrl.caseError" class="error-msg">This case is already planned</p>
   </form>
 </div>

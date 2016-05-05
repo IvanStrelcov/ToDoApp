@@ -1,20 +1,42 @@
+import alertTemplate from './alert-template.html';
+
+class ModalController {
+  close() {
+    this.$dismiss();
+  }
+}
+
 export default class TodoController {
 
-  constructor(MainService) {
+  constructor(MainService, $uibModal) {
     this.MainService = MainService;
+    this.$uibModal = $uibModal;
   }
 
   $onInit() {
     this.changeText = '';
     this.reservText = '';
     this.show = false;
+    this.caseError = false;
+  }
+
+// alert modal
+
+  open() {
+    const alertModal = this.$uibModal.open({
+      animation: true,
+      template: alertTemplate,
+      controller: ModalController,
+      controllerAs: '$modalCtrl',
+      bindToController: true,
+    });
   }
 
 // redact todo case
 
   edit() {
     if(this.MainService.check == true) {
-      alert('Detection of incomplete action');
+      this.open();
       return;
     }
     let text = this.todo.text;
@@ -28,7 +50,7 @@ export default class TodoController {
   change() {
     for (let i = 0; i < this.CardController.card.todos.length; i++) {
       if(this.CardController.card.todos[i].text == this.changeText && this.changeText != this.reservText) {
-        alert('This case is already planned');
+        this.caseError = true;
         return false;
       }
     }
@@ -37,13 +59,14 @@ export default class TodoController {
     this.MainService.check = false;
     this.show = false;
     this.CardController.changeClass();
+    this.caseError = false;
   }
 
 // delete todo case
 
   delete() {
     if(this.MainService.check == true) {
-      alert('Detection of incomplete action');
+      this.open();
       return;
     }
     if (confirm('You really want to delete this case?')) {
