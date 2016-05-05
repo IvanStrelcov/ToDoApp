@@ -1,8 +1,15 @@
 import alertTemplate from './alert-template.html';
+import confirmTemplate from './confirm-template.html';
 
 class ModalController {
   close() {
     this.$dismiss();
+  }
+  cancel() {
+    this.$dismiss();
+  }
+  ok() {
+    this.$close();
   }
 }
 
@@ -29,6 +36,25 @@ export default class TodoController {
       controller: ModalController,
       controllerAs: '$modalCtrl',
       bindToController: true,
+    });
+  }
+
+// confirm modal
+
+  confirm() {
+    const confirmModal = this.$uibModal.open({
+      animation: true,
+      template: confirmTemplate,
+      controller: ModalController,
+      controllerAs: '$modalCtrl',
+      bindToController: true,
+    });
+
+    confirmModal.result.then( () => {
+      this.CardController.deleteTodo(this.index);
+      this.CardController.changeClass();
+    }, () => {
+      return;
     });
   }
 
@@ -69,10 +95,7 @@ export default class TodoController {
       this.open();
       return;
     }
-    if (confirm('You really want to delete this case?')) {
-      this.CardController.deleteTodo(this.index);
-      this.CardController.changeClass();
-    }
+    this.confirm();
   }
 
 // checks whether all marked INPUT
