@@ -52,13 +52,9 @@ export default class CardController {
   change() {
     for (let variable of this.MainController.cardlists) {
       for (let key of variable) {
-        if (this.editTitle.length > 20) {
-          alert('The name is too large, use less symbol');
-          return false;
-        }
         if (_.includes(key, this.editTitle) && this.editTitle != this.card.title) {
-          alert('Card with that name already exist');
-          return false;
+          this.error = true;
+          return;
         }
       }
     }
@@ -66,6 +62,7 @@ export default class CardController {
     this.editTitle = '';
     this.MainService.check = false;
     this.show = false;
+    this.error = false;
   }
 
 // delete card
@@ -90,7 +87,7 @@ export default class CardController {
     for (var i = 0; i < this.card.todos.length; i++) {
       if(this.card.todos[i].done === false) {
         this.card.class = 'default';
-        return
+        return;
       }
       else {
         this.card.class = 'success';

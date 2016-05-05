@@ -23,10 +23,11 @@
         <span ng-show="!$cardCtrl.show">Total todos: {{$cardCtrl.card.total}}</span>
         <form ng-submit="$cardCtrl.change()" ng-if="$cardCtrl.show">
           <input type="text"
-                 class="form-control error-{{$modalCtrl.error}}"
+                 maxlength="20"
+                 class="form-control error-{{$cardCtrl.error}}"
                  ng-model="$cardCtrl.editTitle"
                  required>
-          <p ng-if="$modalCtrl.error" class="error-msg">Card with that name already exist</p>
+          <p ng-if="$cardCtrl.error" class="error-msg">Card with that name already exist</p>
         </form>
       </div>
 

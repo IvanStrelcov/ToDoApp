@@ -1,6 +1,7 @@
 import template from './modal-template.html';
 
 class ModalController {
+
   constructor(MainService){
     this.MainService = MainService;
   }
