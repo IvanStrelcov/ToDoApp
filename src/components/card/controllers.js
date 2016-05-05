@@ -1,7 +1,20 @@
+import template from './alert-template.html';
+
+// modal  controller
+
+class ModalController {
+  close() {
+    this.$dismiss();
+  }
+}
+
+// card controller
+
 export default class CardController {
 
-  constructor(MainService) {
+  constructor(MainService, $uibModal) {
     this.MainService = MainService;
+    this.$uibModal = $uibModal;
   }
 
   $onInit() {
@@ -36,12 +49,24 @@ export default class CardController {
     this.card.total -= 1;
   }
 
+// alert
+
+open() {
+  const modal = this.$uibModal.open({
+    animation: true,
+    template: template,
+    controller: ModalController,
+    controllerAs: '$modalCtrl',
+    bindToController: true,
+  });
+}
+
 // redact title
 
   edit() {
     if(this.MainService.check == true) {
-      alert('Detection of incomplete action');
-      return false;
+      this.open();
+      return;
     }
     this.editTitle = this.card.title;
     this.card.title = '';
@@ -52,7 +77,7 @@ export default class CardController {
   change() {
     for (let variable of this.MainController.cardlists) {
       for (let key of variable) {
-        if (_.includes(key, this.editTitle) && this.editTitle != this.card.title) {
+        if (_.includes(key, this.editTitle) && this.editTitle != this.card.title && this.editTitle != 'Default title') {
           this.error = true;
           return;
         }
@@ -69,7 +94,7 @@ export default class CardController {
 
   delete() {
     if(this.MainService.check == true) {
-      alert('Detection of incomplete action');
+      this.open();
       return;
     }
     if(confirm('You really want to delete this card?')) {
