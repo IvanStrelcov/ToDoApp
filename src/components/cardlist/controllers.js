@@ -13,7 +13,7 @@ class ModalController {
   }
 
   checkTitle() {
-    if (this.cardname.length === 0) {
+    if (this.cardname.length === 0 || this.cardname == null) {
       this.cardname = 'Default title';
     }
     for (let variable of this.MainService.cardlists) {

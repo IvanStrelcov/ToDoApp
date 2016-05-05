@@ -7,8 +7,7 @@
            ng-model="$modalCtrl.cardname"
            maxlength="20"
            placeholder="Add title of new Card"
-           class="form-control error-{{$modalCtrl.error}}"
-           required>
+           class="form-control error-{{$modalCtrl.error}}">
            <p ng-if="$modalCtrl.error" class="error-msg">Card with that name already exist</p>
   </form>
 </div>
