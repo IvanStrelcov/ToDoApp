@@ -24,10 +24,10 @@
         <form ng-submit="$cardCtrl.change()" ng-if="$cardCtrl.show">
           <input type="text"
                  maxlength="20"
-                 class="form-control error-{{$cardCtrl.error}}"
+                 class="form-control error-{{$cardCtrl.titleError}}"
                  ng-model="$cardCtrl.editTitle"
                  required>
-          <p ng-if="$cardCtrl.error" class="error-msg">Card with that name already exist</p>
+          <p ng-if="$cardCtrl.titleError" class="error-msg">Card with that name already exist</p>
         </form>
       </div>
 
@@ -42,8 +42,9 @@
           <input type="text"
                  ng-model="$cardCtrl.todoText"
                  placeholder="Add new todo here"
-                 class="form-control"
+                 class="form-control error-{{$cardCtrl.caseError}}"
                  required>
+          <p ng-if="$cardCtrl.caseError" class="error-msg">This case is already planned</p>
         </form>
       </div>
     </div>

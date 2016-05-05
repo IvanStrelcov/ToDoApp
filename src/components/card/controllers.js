@@ -1,10 +1,18 @@
-import template from './alert-template.html';
+import alertTemplate from './alert-template.html';
+import confirmTemplate from './confirm-template.html';
+
 
 // modal  controller
 
 class ModalController {
   close() {
     this.$dismiss();
+  }
+  cancel() {
+    this.$dismiss();
+  }
+  ok() {
+    this.$close();
   }
 }
 
@@ -20,26 +28,58 @@ export default class CardController {
   $onInit() {
     this.editTitle = '';
     this.show = false;
-    this.error = false;
+    this.titleError = false;
+    this.caseError = false;
+  }
+
+  // alert modal
+
+  open() {
+    const alertModal = this.$uibModal.open({
+      animation: true,
+      template: alertTemplate,
+      controller: ModalController,
+      controllerAs: '$modalCtrl',
+      bindToController: true,
+    });
+  }
+
+  // confirm modal
+
+  confirm() {
+    const confirmModal = this.$uibModal.open({
+      animation: true,
+      template: confirmTemplate,
+      controller: ModalController,
+      controllerAs: '$modalCtrl',
+      bindToController: true,
+    });
+
+    confirmModal.result.then( () => {
+      this.CardListController.delete(this.index);
+    }, () => {
+      return;
+    });
   }
 
 // add todo case
 
   addTodo() {
     if(this.MainService.check == true) {
-      alert('Detection of incomplete action');
+      this.open();
       return;
     }
     for (let i = 0; i < this.card.todos.length; i++) {
       if(this.card.todos[i].text == this.todoText) {
-        alert('This case is already planned');
-        return false;
+        this.caseError = true;
+        return;
       }
     }
     this.card.todos.push({text:this.todoText, done:false});
     this.todoText = '';
     this.changeClass();
     this.card.total += 1;
+    this.caseError = false;
   }
 
 // delete todo case
@@ -48,18 +88,6 @@ export default class CardController {
     this.card.todos.splice(index, 1);
     this.card.total -= 1;
   }
-
-// alert
-
-open() {
-  const modal = this.$uibModal.open({
-    animation: true,
-    template: template,
-    controller: ModalController,
-    controllerAs: '$modalCtrl',
-    bindToController: true,
-  });
-}
 
 // redact title
 
@@ -78,7 +106,7 @@ open() {
     for (let variable of this.MainController.cardlists) {
       for (let key of variable) {
         if (_.includes(key, this.editTitle) && this.editTitle != this.card.title && this.editTitle != 'Default title') {
-          this.error = true;
+          this.titleError = true;
           return;
         }
       }
@@ -87,7 +115,7 @@ open() {
     this.editTitle = '';
     this.MainService.check = false;
     this.show = false;
-    this.error = false;
+    this.titleError = false;
   }
 
 // delete card
@@ -97,9 +125,7 @@ open() {
       this.open();
       return;
     }
-    if(confirm('You really want to delete this card?')) {
-      this.CardListController.delete(this.index);
-    }
+    this.confirm();
   }
 
 // change color of card
