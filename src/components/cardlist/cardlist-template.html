@@ -2,5 +2,12 @@
   <div class="list-inline" ng-repeat="card in $clCtrl.cardlist track by $index">
     <card index="$index" card="card"></card>
   </div>
+  <button ng-click="$clCtrl.deleteRow()"
+          type="button"
+          class="close"
+          aria-label="Close"
+          ng-if="$clCtrl.cardlist.length < 1">
+    <span aria-hidden="true" class="glyphicon glyphicon-trash"></span>
+  </button>
   <add-card ng-click="$clCtrl.open()" ng-if="$clCtrl.cardlist.length < 3"></add-card>
 </div>

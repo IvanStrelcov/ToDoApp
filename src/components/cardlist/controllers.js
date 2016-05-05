@@ -1,4 +1,5 @@
 import template from './modal-template.html';
+import confirmTemplate from './confirm-template.html';
 
 class ModalController {
 
@@ -29,6 +30,10 @@ class ModalController {
   cancel() {
     this.$dismiss();
   }
+
+  ok() {
+    this.$close();
+  }
 }
 
 export default class CardListController {
@@ -37,6 +42,8 @@ export default class CardListController {
     this.MainService = MainService;
     this.$uibModal = $uibModal;
   }
+
+// modal for add new title
 
   open() {
     const modal = this.$uibModal.open({
@@ -52,10 +59,29 @@ export default class CardListController {
     });
   }
 
+// confirm for delete row
+
+  confirm() {
+    const confirmModal = this.$uibModal.open({
+      animation: true,
+      template: confirmTemplate,
+      controller: ModalController,
+      controllerAs: '$modalCtrl',
+      bindToController: true,
+    });
+
+    confirmModal.result.then( () => {
+      this.MainController.deleteRow(this.index);
+    }, () => {
+      return;
+    });
+  }
+
   delete(index) {
     this.cardlist.splice(index, 1);
-    if (this.cardlist.length < 1) {
-      this.MainController.deleteRow(this.index);
-    }
+  }
+
+  deleteRow() {
+    this.confirm();
   }
 }
