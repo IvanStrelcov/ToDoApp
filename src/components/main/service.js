@@ -4,13 +4,16 @@ export default class MainService {
     this.$http = $http;
     this.check = false;
   }
-  renderRow() {
+
+  getCardlists() {
     return this.$http.get('http://localhost:3001/');
   }
+
   addRow() {
     return this.$http.post('http://localhost:3001/rows', {data: []});
   }
-  deleteRow(index) {
-    return this.$http.delete('http://localhost:3001/rows/' + index);
+  
+  deleteRow(id) {
+    return this.$http.delete('http://localhost:3001/rows/' + id);
   }
 }

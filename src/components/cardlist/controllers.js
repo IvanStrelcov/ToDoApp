@@ -71,7 +71,7 @@ export default class CardListController {
     });
 
     confirmModal.result.then( () => {
-      this.MainController.deleteRow(this.index);
+      this.MainController.deleteRow(this.id);
     }, () => {
       return;
     });

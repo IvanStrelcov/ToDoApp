@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row" ng-repeat="cardlist in $mainCtrl.cardlists track by $index" ng-if="$mainCtrl.cardlists.length">
-    <card-list cardlist="cardlist" index="$index"></card-list>
+    <card-list id="cardlist.id" cardlist="cardlist.cardlist" index="$index"></card-list>
   </div>
   <div class="row">
     <add-row ng-click="$mainCtrl.addRow()"></add-row>

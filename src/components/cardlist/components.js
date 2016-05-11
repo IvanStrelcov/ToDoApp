@@ -10,7 +10,8 @@ export default () => {
     replace: true,
     scope: {
       index: '=',
-      cardlist: '='
+      cardlist: '=',
+      id: '='
     },
     require: {
       MainController: '^^appMain'

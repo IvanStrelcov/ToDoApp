@@ -2,30 +2,36 @@ export default class MainController {
 
   constructor(MainService) {
     this.MainService = MainService;
-    this.cardlists = [];
   }
 
   $onInit() {
-    this.MainService.renderRow().success(result => (this.cardlists = result));
+    this.MainService.getCardlists()
+                    .success(data => {
+                      this.MainService.cardlists = data;
+                      this.cardlists = this.MainService.cardlists;
+                    })
+                    .error(data => {
+                      console.log('Error in GET cardlists');
+                    });
   }
 
   addRow() {
     this.MainService.addRow()
                     .success(data => {
-                      this.cardlists.push(data);
+                      this.MainService.cardlists.push(data);
                     })
-                    error(data => {
-                      console.log('Error in POST row', data);
+                    .error(data => {
+                      console.log('Error in POST row');
                     });
   }
 
-  deleteRow(index) {
-    this.MainService.deleteRow(index)
+  deleteRow(id) {
+    this.MainService.deleteRow(id)
                     .success(data => {
-                      this.cardlists.splice(index, 1);
+                      _.pullAllBy(this.MainService.cardlists, [{ 'id': data }], 'id');
                     })
                     .error(data => {
-                      console.log('Error in DELETE row', data);
+                      console.log('Error in DELETE row');
                     });
   }
 }
