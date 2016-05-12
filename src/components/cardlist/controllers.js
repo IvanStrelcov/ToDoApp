@@ -3,8 +3,9 @@ import confirmTemplate from './confirm-template.html';
 
 class ModalController {
 
-  constructor(MainService){
+  constructor(MainService, CardListService) {
     this.MainService = MainService;
+    this.CardListService = CardListService;
   }
 
   $onInit() {
@@ -13,17 +14,18 @@ class ModalController {
   }
 
   checkTitle() {
-    if (this.cardname.length === 0 || this.cardname == null) {
+    if (this.cardname.length === 0 || this.cardname === null) {
       this.cardname = 'Default title';
     }
     for (let variable of this.MainService.cardlists) {
-      for (let key of variable) {
+      for (let key of variable.cardlist) {
         if (_.includes(key, this.cardname) && this.cardname != 'Default title') {
           this.error = true;
           return;
         }
       }
     }
+
     this.$close(this.cardname);
   }
 
@@ -38,14 +40,28 @@ class ModalController {
 
 export default class CardListController {
 
-  constructor(MainService, $uibModal) {
+  constructor(MainService, $uibModal, CardListService) {
     this.MainService = MainService;
     this.$uibModal = $uibModal;
+    this.CardListService = CardListService;
+    this.cardlist = [];
+  }
+
+  $onInit() {
+    this.CardListService.getCards(this.id)
+      .success(result => {
+        for (let variable of result) {
+          this.cardlist.push(variable);
+        }
+      })
+      .error(result => {
+        console.log('Error in GET cards');
+      });
   }
 
 // modal for add new title
 
-  open() {
+  addCard() {
     const modal = this.$uibModal.open({
       animation: true,
       template: template,
@@ -55,11 +71,23 @@ export default class CardListController {
     });
 
     modal.result.then(title => {
-      this.cardlist.push({title: title, todos: [], class: 'default', total: 0});
+      const data = {
+        title: title,
+        todos: [],
+        class: 'default',
+        cardlist_id: this.id
+      };
+      this.CardListService.addCard(data)
+        .success(result => {
+          this.cardlist.push(result);
+        })
+        .error( result => {
+          console.log('error in POST card');
+        });
     });
   }
 
-// confirm for delete row
+// confirm for remove row
 
   confirm() {
     const confirmModal = this.$uibModal.open({
@@ -71,17 +99,27 @@ export default class CardListController {
     });
 
     confirmModal.result.then( () => {
-      this.MainController.deleteRow(this.id);
+      this.MainController.removeRow(this.id);
     }, () => {
-      return;
+      return false;
     });
   }
 
-  delete(index) {
-    this.cardlist.splice(index, 1);
+// remove card
+
+  removeCard(id) {
+    this.CardListService.removeCard(id)
+      .success( result => {
+        _.pullAllBy(this.cardlist, [{ 'id': result }], 'id');
+      })
+      .error( result => {
+        console.log('error in DELETE card');
+      });
   }
 
-  deleteRow() {
+// remove row
+
+  removeRow() {
     this.confirm();
   }
 }

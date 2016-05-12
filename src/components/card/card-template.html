@@ -5,7 +5,7 @@
         <button type="button"
                 class="close"
                 aria-label="Close"
-                ng-click="$cardCtrl.delete()"
+                ng-click="$cardCtrl.removeCard()"
                 ng-show="!$cardCtrl.show">
           <span aria-hidden="true" class="small glyphicon glyphicon-remove"></span>
         </button>
@@ -20,7 +20,7 @@
             ng-bind="$cardCtrl.card.title"
             ng-show="!$cardCtrl.show">
         </h3>
-        <span ng-show="!$cardCtrl.show">Total todos: {{$cardCtrl.card.total}}</span>
+        <span ng-show="!$cardCtrl.show">Total todos: {{$cardCtrl.card.todos.length}}</span>
         <form ng-submit="$cardCtrl.change()" ng-if="$cardCtrl.show">
           <input type="text"
                  maxlength="20"

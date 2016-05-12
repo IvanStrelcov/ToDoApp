@@ -51,7 +51,7 @@ export default class TodoController {
     });
 
     confirmModal.result.then( () => {
-      this.CardController.deleteTodo(this.index);
+      this.CardController.removeTodo(this.todo.id);
       this.CardController.changeClass();
     }, () => {
       return;

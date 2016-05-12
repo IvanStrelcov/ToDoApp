@@ -7,7 +7,6 @@ export default class MainController {
   $onInit() {
     this.MainService.getCardlists()
                     .success(data => {
-                      this.MainService.cardlists = data;
                       this.cardlists = this.MainService.cardlists;
                     })
                     .error(data => {
@@ -16,22 +15,10 @@ export default class MainController {
   }
 
   addRow() {
-    this.MainService.addRow()
-                    .success(data => {
-                      this.MainService.cardlists.push(data);
-                    })
-                    .error(data => {
-                      console.log('Error in POST row');
-                    });
+    this.MainService.addRow();
   }
 
-  deleteRow(id) {
-    this.MainService.deleteRow(id)
-                    .success(data => {
-                      _.pullAllBy(this.MainService.cardlists, [{ 'id': data }], 'id');
-                    })
-                    .error(data => {
-                      console.log('Error in DELETE row');
-                    });
+  removeRow(id) {
+    this.MainService.removeRow(id);
   }
 }

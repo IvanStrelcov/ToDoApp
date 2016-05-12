@@ -20,9 +20,10 @@ class ModalController {
 
 export default class CardController {
 
-  constructor(MainService, $uibModal) {
+  constructor(MainService, $uibModal, CardService) {
     this.MainService = MainService;
     this.$uibModal = $uibModal;
+    this.CardService = CardService;
   }
 
   $onInit() {
@@ -30,6 +31,15 @@ export default class CardController {
     this.show = false;
     this.titleError = false;
     this.caseError = false;
+    this.CardService.getTodos(this.card.id)
+      .success(result => {
+        for (let variable of result) {
+          this.card.todos.push(variable);
+        }
+      })
+      .error(data => {
+        console.log('Error in GET cards');
+    });
   }
 
   // alert modal
@@ -56,7 +66,7 @@ export default class CardController {
     });
 
     confirmModal.result.then( () => {
-      this.CardListController.delete(this.index);
+      this.CardListController.removeCard(this.card.id);
     }, () => {
       return;
     });
@@ -75,18 +85,34 @@ export default class CardController {
         return;
       }
     }
-    this.card.todos.push({text:this.todoText, done:false});
+    const data = {
+      text: this.todoText,
+      done: false,
+      card_id: this.card.id
+    };
+    this.CardService.addTodo(data)
+      .success(result => {
+        this.card.todos.push(result);
+        this.changeClass();
+      })
+      .error(result => {
+        console.log('error in POST todo');
+      });
     this.todoText = '';
-    this.changeClass();
-    this.card.total += 1;
     this.caseError = false;
   }
 
 // delete todo case
 
-  deleteTodo(index) {
-    this.card.todos.splice(index, 1);
-    this.card.total -= 1;
+  removeTodo(id) {
+    this.CardService.removeTodo(id)
+      .success(result => {
+        _.pullAllBy(this.card.todos, [{ 'id': result }], 'id');
+        this.changeClass();
+      })
+      .error(result => {
+        console.log('error in DELETE todo');
+      });
   }
 
 // redact title
@@ -103,24 +129,33 @@ export default class CardController {
   }
 
   change() {
-    for (let variable of this.MainController.cardlists) {
-      for (let key of variable) {
+    for (let variable of this.MainService.cardlists) {
+      for (let key of variable.cardlist) {
         if (_.includes(key, this.editTitle) && this.editTitle != this.card.title && this.editTitle != 'Default title') {
           this.titleError = true;
           return;
         }
       }
     }
-    this.card.title = this.editTitle;
-    this.editTitle = '';
-    this.MainService.check = false;
-    this.show = false;
-    this.titleError = false;
+    const data = {
+      title: this.editTitle
+    };
+    this.CardService.changeTitle(this.card.id, data)
+      .success( result => {
+        this.card.title = this.editTitle;
+        this.editTitle = '';
+        this.MainService.check = false;
+        this.show = false;
+        this.titleError = false;
+      })
+      .error( result => {
+        console.log('error in PUT card');
+      });
   }
 
 // delete card
 
-  delete() {
+  removeCard() {
     if(this.MainService.check == true) {
       this.open();
       return;
@@ -128,14 +163,14 @@ export default class CardController {
     this.confirm();
   }
 
-// change color of card
+// change color (class) of card
 
   changeClass() {
     if (this.card.todos.length === 0) {
       this.card.class = 'default';
       return;
     }
-    for (var i = 0; i < this.card.todos.length; i++) {
+    for (let i = 0; i < this.card.todos.length; i++) {
       if(this.card.todos[i].done === false) {
         this.card.class = 'default';
         return;
