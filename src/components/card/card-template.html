@@ -41,6 +41,8 @@
         <form ng-submit="$cardCtrl.addTodo($event)">
           <input type="text"
                  ng-model="$cardCtrl.todoText"
+                 ng-blur="$cardCtrl.todoText = '';
+                          $cardCtrl.caseError = false"
                  placeholder="Add new todo here"
                  class="form-control error-{{$cardCtrl.caseError}}"
                  required>
