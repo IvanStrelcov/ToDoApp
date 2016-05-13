@@ -15,9 +15,10 @@ class ModalController {
 
 export default class TodoController {
 
-  constructor(MainService, $uibModal) {
+  constructor(MainService, $uibModal, TodoService) {
     this.MainService = MainService;
     this.$uibModal = $uibModal;
+    this.TodoService = TodoService;
   }
 
   $onInit() {
@@ -80,12 +81,21 @@ export default class TodoController {
         return false;
       }
     }
-    this.todo.text = this.changeText;
-    this.changeText = '';
-    this.MainService.check = false;
-    this.show = false;
-    this.CardController.changeClass();
-    this.caseError = false;
+    const data = {
+      title: this.changeText,
+    };
+    this.TodoService.changeTitle(this.todo.id, data)
+      .success( result => {
+        this.todo.text = result;
+        this.changeText = '';
+        this.MainService.check = false;
+        this.show = false;
+        this.CardController.changeClass();
+        this.caseError = false;
+      })
+      .error( result => {
+        console.log('error in PUT title of todo');
+      });
   }
 
 // delete todo case
@@ -102,6 +112,17 @@ export default class TodoController {
 
   checkDone(event) {
     event.stopPropagation();
-    this.CardController.changeClass();
+    const data = {
+      status: this.todo.done,
+    };
+    this.TodoService.changeStatus(this.todo.id, data)
+      .success( result => {
+        result = JSON.parse(result);
+        this.todo.done = result;
+        this.CardController.changeClass();
+      })
+      .error( result => {
+        console.log('error in PUT todo status');
+      });
   }
 }

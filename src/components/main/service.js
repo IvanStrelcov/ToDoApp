@@ -20,7 +20,6 @@ export default class MainService {
     return this.$http.post('http://localhost:3001/rows', {data: []})
       .success(result => {
         this.cardlists.push(result);
-        console.log(this.cardlists);
       })
       .error(result => {
         console.log('error in POST row');

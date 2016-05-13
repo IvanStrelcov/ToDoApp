@@ -36,6 +36,7 @@ export default class CardController {
         for (let variable of result) {
           this.card.todos.push(variable);
         }
+        this.changeClass();
       })
       .error(data => {
         console.log('Error in GET cards');
@@ -103,6 +104,7 @@ export default class CardController {
   }
 
 // delete todo case
+// !!! call in todo controller
 
   removeTodo(id) {
     this.CardService.removeTodo(id)
@@ -164,6 +166,7 @@ export default class CardController {
   }
 
 // change color (class) of card
+// !!! call in todo controller
 
   changeClass() {
     if (this.card.todos.length === 0) {
