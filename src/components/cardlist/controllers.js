@@ -48,7 +48,6 @@ export default class CardListController {
   }
 
   $onInit() {
-    console.log(this);
     this.CardListService.getCards(this.id)
       .success(result => {
         for (let variable of result) {

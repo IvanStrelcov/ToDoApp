@@ -5,7 +5,7 @@ export default class CardListService {
   }
 
   getCards(cardlistId) {
-    return this.$http.get('http://localhost:3001/cardlist/' + cardlistId);
+    return this.$http.get('http://localhost:3001/rows/' + cardlistId);
   }
 
   addCard(data) {

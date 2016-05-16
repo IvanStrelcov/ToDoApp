@@ -29,7 +29,7 @@ export default class MainService {
   removeRow(id) {
     return this.$http.delete('http://localhost:3001/rows/' + id)
       .success(result => {
-        _.pullAllBy(this.cardlists, [{ 'id': result }], 'id');
+        _.pullAllBy(this.cardlists, [{ '_id': result }], '_id');
       })
       .error(result => {
         console.log('Error in DELETE row');
