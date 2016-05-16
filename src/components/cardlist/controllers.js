@@ -107,10 +107,10 @@ export default class CardListController {
 
 // remove card
 
-  removeCard(id) {
-    this.CardListService.removeCard(id)
+  removeCard(_id) {
+    this.CardListService.removeCard(_id)
       .success( result => {
-        _.pullAllBy(this.cardlist, [{ 'id': result }], 'id');
+        _.pullAllBy(this.cardlist, [{ '_id': result }], '_id');
       })
       .error( result => {
         console.log('error in DELETE card');

@@ -31,7 +31,7 @@ export default class CardController {
     this.show = false;
     this.titleError = false;
     this.caseError = false;
-    this.CardService.getTodos(this.card.id)
+    this.CardService.getTodos(this.card._id)
       .success(result => {
         for (let variable of result) {
           this.card.todos.push(variable);
@@ -67,7 +67,7 @@ export default class CardController {
     });
 
     confirmModal.result.then( () => {
-      this.CardListController.removeCard(this.card.id);
+      this.CardListController.removeCard(this.card._id);
     }, () => {
       return;
     });
@@ -89,7 +89,7 @@ export default class CardController {
     const data = {
       text: this.todoText,
       done: false,
-      card_id: this.card.id
+      card_id: this.card._id
     };
     this.CardService.addTodo(data)
       .success(result => {
@@ -109,7 +109,7 @@ export default class CardController {
   removeTodo(id) {
     this.CardService.removeTodo(id)
       .success(result => {
-        _.pullAllBy(this.card.todos, [{ 'id': result }], 'id');
+        _.pullAllBy(this.card.todos, [{ '_id': result }], '_id');
         this.changeClass();
       })
       .error(result => {
@@ -142,7 +142,7 @@ export default class CardController {
     const data = {
       title: this.editTitle
     };
-    this.CardService.changeTitle(this.card.id, data)
+    this.CardService.changeTitle(this.card._id, data)
       .success( result => {
         this.card.title = this.editTitle;
         this.editTitle = '';

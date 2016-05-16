@@ -52,7 +52,7 @@ export default class TodoController {
     });
 
     confirmModal.result.then( () => {
-      this.CardController.removeTodo(this.todo.id);
+      this.CardController.removeTodo(this.todo._id);
       this.CardController.changeClass();
     }, () => {
       return;
@@ -84,7 +84,7 @@ export default class TodoController {
     const data = {
       title: this.changeText,
     };
-    this.TodoService.changeTitle(this.todo.id, data)
+    this.TodoService.changeTitle(this.todo._id, data)
       .success( result => {
         this.todo.text = result;
         this.changeText = '';
@@ -115,7 +115,7 @@ export default class TodoController {
     const data = {
       status: this.todo.done,
     };
-    this.TodoService.changeStatus(this.todo.id, data)
+    this.TodoService.changeStatus(this.todo._id, data)
       .success( result => {
         result = JSON.parse(result);
         this.todo.done = result;
