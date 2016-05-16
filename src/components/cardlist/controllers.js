@@ -29,6 +29,18 @@ class ModalController {
     this.$close(this.cardname);
   }
 
+  validate() {
+    for (let variable of this.MainService.cardlists) {
+      for (let key of variable.cardlist) {
+        if (_.includes(key, this.cardname) && this.cardname != 'Default title') {
+          this.error = true;
+          return;
+        }
+        this.error = false;
+      }
+    }
+  }
+
   cancel() {
     this.$dismiss();
   }

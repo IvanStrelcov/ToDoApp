@@ -5,6 +5,7 @@
   <form type="submit" ng-submit="$modalCtrl.checkTitle()">
     <input type="text"
            ng-model="$modalCtrl.cardname"
+           ng-keyup="$modalCtrl.validate()"
            maxlength="20"
            placeholder="Add title of new Card"
            class="form-control error-{{$modalCtrl.error}}">
