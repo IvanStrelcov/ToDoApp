@@ -78,7 +78,7 @@ export default class TodoController {
     for (let i = 0; i < this.CardController.card.todos.length; i++) {
       if(this.CardController.card.todos[i].text == this.changeText && this.changeText != this.reservText) {
         this.caseError = true;
-        return false;
+        return;
       }
     }
     const data = {
@@ -97,6 +97,18 @@ export default class TodoController {
         console.log('error in PUT title of todo');
       });
   }
+
+// validate input
+
+validate() {
+  for (let i = 0; i < this.CardController.card.todos.length; i++) {
+    if(this.CardController.card.todos[i].text == this.changeText && this.changeText != this.reservText) {
+      this.caseError = true;
+      return;
+    }
+    this.caseError = false;
+  }
+}
 
 // delete todo case
 

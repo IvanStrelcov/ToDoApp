@@ -22,6 +22,8 @@
     <input type="text"
            class="form-control error-{{$tdCtrl.caseError}}"
            ng-model="$tdCtrl.changeText"
+           ng-blur="$tdCtrl.edit()"
+           ng-keyup="$tdCtrl.validate()"
            required>
     <p ng-if="$tdCtrl.caseError" class="error-msg">This case is already planned</p>
   </form>

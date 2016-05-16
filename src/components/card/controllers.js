@@ -155,6 +155,32 @@ export default class CardController {
       });
   }
 
+// validate edit input
+
+  validateEdit() {
+    for (let variable of this.MainService.cardlists) {
+      for (let key of variable.cardlist) {
+        if (_.includes(key, this.editTitle) && this.editTitle != this.card.title && this.editTitle != 'Default title') {
+          this.titleError = true;
+          return;
+        }
+        this.titleError = false;
+      }
+    }
+  }
+
+  // validate edit input
+
+  validateAdd() {
+    for (let i = 0; i < this.card.todos.length; i++) {
+      if(this.card.todos[i].text == this.todoText) {
+        this.caseError = true;
+        return;
+      }
+      this.caseError = false;
+    }
+  }
+
 // delete card
 
   removeCard() {

@@ -26,8 +26,12 @@
                  maxlength="20"
                  class="form-control error-{{$cardCtrl.titleError}}"
                  ng-model="$cardCtrl.editTitle"
+                 ng-blur="$cardCtrl.edit()"
+                 ng-keyup="$cardCtrl.validateEdit()"
                  required>
-          <p ng-if="$cardCtrl.titleError" class="error-msg">Card with that name already exist</p>
+          <p ng-if="$cardCtrl.titleError"
+             ng-model-options="{ updateOn: 'keyup'}"
+             class="error-msg">Card with that name already exist</p>
         </form>
       </div>
 
@@ -43,6 +47,7 @@
                  ng-model="$cardCtrl.todoText"
                  ng-blur="$cardCtrl.todoText = '';
                           $cardCtrl.caseError = false"
+                 ng-keyup="$cardCtrl.validateAdd()"
                  placeholder="Add new todo here"
                  class="form-control error-{{$cardCtrl.caseError}}"
                  required>
