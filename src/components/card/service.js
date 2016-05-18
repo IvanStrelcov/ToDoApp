@@ -5,11 +5,11 @@ export default class CardService {
   }
 
   getTodos(cardId) {
-    return this.$http.get('http://localhost:3001/cards/' + cardId);
+    return this.$http.get('http://localhost:3001/todos/' + cardId);
   }
 
   addTodo(data) {
-    return this.$http.post('http://localhost:3001/todo', data);
+    return this.$http.post('http://localhost:3001/todos', data);
   }
 
   removeTodo(id) {

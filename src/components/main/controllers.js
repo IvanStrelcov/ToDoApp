@@ -5,8 +5,10 @@ export default class MainController {
   }
 
   $onInit() {
+    console.log('init');
     this.MainService.getCardlists()
                     .success(data => {
+                      console.log('success');  
                       this.cardlists = this.MainService.cardlists;
                     })
                     .error(data => {
